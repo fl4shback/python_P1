@@ -5,29 +5,34 @@ p1_score = 0
 p2_score = 0
 choices = ["rock", "paper", "scissors"]
 
-### Entering in a loop to restart the game until total score is 5
-while p1_score + p2_score < 5:
-
-    ### Prints choices
+def display_choices():
     print("Choose your weapon !")
     choice_id = 0
-    for choice in choices:
-        print(f"{choice_id}. {choice.title()}")
+    # for choice in choices:
+    #     print(f"{choice_id}. {choice.title()}")
+    #     choice_id += 1
+    while choice_id < len(choices):
+        print(f"{choice_id}. {choices[choice_id].title()}")
         choice_id += 1
+
+### Entering in a loop to restart the game until total score is 5
+while p1_score + p2_score < 5:
+    display_choices()
 
     ### Traps player in a loop until a valid choice is provided
     p1_choice = None
-    reloop = 0
-    while p1_choice != 0 and p1_choice != 1  and p1_choice != 2:
-        if reloop == 1:
-            print("Please choose a valid value !")
+    looprun = 0
+    valid_choice = range(0, 3)
+    while p1_choice not in valid_choice:
+        if looprun > 0:
+            print(f"Please choose a valid number !")
+            display_choices()
         p1_choice = input("Player 1, make your choice:")
-        reloop = 1
         try:
             p1_choice = int(p1_choice)
         except:
-            print("Please input a number !")
-            reloop = 0
+            pass
+        looprun += 1
     p1_choice = choices[p1_choice]
 
     ### Computer makes a choice
